@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d11efd96289f484aa0421aaaf3ba9fa, type: 3}
+  m_Name: NPC_1
+  m_EditorClassIdentifier: 
+  actor: {fileID: 275174326450369103, guid: eb7cd7ac6e8351e4daa0d380dc6a8b76, type: 3}
+  speakerSprite: {fileID: 0}
+  sentence: 
+  dialogues:
+  - actorName: NPC_1
+    profile: {fileID: -8091321643688609963, guid: 37112f8b17cac3848921fce2a3688997, type: 3}
+    sentence:
+      portuguese: "Ol\xE1, bem vindo ao meu mundo!"
+      english: Hello
+      japanese: "\u3053\u3093\u306B\u3061\u306F"
+      korean: "\uC548\uB155\uD558\uC138\uC694"
+  - actorName: Me
+    profile: {fileID: -8091321643688609963, guid: 37112f8b17cac3848921fce2a3688997, type: 3}
+    sentence:
+      portuguese: "Ol\xE1 estou bem"
+      english: Hello, im good
+      japanese: "\u307E\u3093\u3053\u304C\u5927\u597D\u304D\uFF01"
+      korean: "\uC548\uB155\uD558\uC138\uC694, \uC790\uB294 "
