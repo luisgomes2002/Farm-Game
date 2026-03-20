@@ -4,10 +4,10 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public InventoryItemData ItemData;
-    public float MoveSpeed;
-    public float MoveDistance;
+    // public float MoveSpeed;
+    // public float MoveDistance;
 
-    private Vector3 startPosition;
+    // private Vector3 startPosition;
 
     // void Start()
     // {
@@ -19,6 +19,16 @@ public class ItemPickUp : MonoBehaviour
     //     float newY = Mathf.Sin(Time.time * MoveSpeed) * MoveDistance;
     //     transform.position = new Vector3(startPosition.x, startPosition.y + newY, startPosition.z);
     // }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Player player = collision.GetComponent<Player>();
+
+        if (player != null)
+        {
+            GetItem(player);
+        }
+    }
 
     public void GetItem(Player player)
     {

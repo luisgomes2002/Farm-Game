@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ItemDetector : MonoBehaviour
 {
+	// DETECTAR E COLETAR ITEM COM O MOUSE, NÂO ESTA EM USO
+
 	[SerializeField] private Camera mainCamera;
 	private ItemPickUp currentItem;
 

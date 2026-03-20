@@ -8,5 +8,4 @@ public class InventoryItemData : ScriptableObject
 	[TextArea(4, 4)] public string Description;
 	public Sprite Icon;
 	public int MaxStackSize;
-
 }

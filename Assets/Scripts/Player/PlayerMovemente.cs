@@ -18,7 +18,6 @@ public class PlayerMovemente : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         OnMove();
     }
 

@@ -23,7 +23,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnDig()
     {
-        if (player.handlingObj == 1 && player.CanClick)
+        if (player.handlingObj == 0 && player.CanClick)
         {
             if (Input.GetMouseButton(0))
             {
@@ -42,7 +42,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnWatering()
     {
-        if (player.handlingObj == 2 && player.CanClick)
+        if (player.handlingObj == 1 && player.CanClick)
         {
             if (Input.GetMouseButton(0)) // && playerItems.CurrentWater > 0
             {
@@ -62,7 +62,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnCutting()
     {
-        if (player.handlingObj == 4 && player.CanClick)
+        if (player.handlingObj == 2 && player.CanClick)
         {
             if (Input.GetMouseButton(0))
             {
@@ -74,8 +74,6 @@ public class PlayerFarm : MonoBehaviour
     }
 
     #region Actions
-
-    // DIGGING
     private void OnDiggingAnimation()
     {
         if (currentSlotToDig != null)
@@ -93,7 +91,6 @@ public class PlayerFarm : MonoBehaviour
         anim.SetInteger("transition", 0);
     }
 
-    // WATERING
     private void OnWateringAnimation()
     {
         if (currentSlotToDig != null)
@@ -111,7 +108,6 @@ public class PlayerFarm : MonoBehaviour
         anim.SetInteger("transition", 0);
     }
 
-    // CUTTING
     private void StopCuttingAnimation()
     {
         player.CanMove = true;

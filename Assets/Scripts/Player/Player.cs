@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         DetectSlot();
-        DetectItem();
+        // DetectItem();
     }
 
     private void DetectSlot()
@@ -84,39 +84,41 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void DetectItem()
-    {
-        itemPickUps.Clear();
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactionRange, itemLayer);
+    // DETECTOR PARA PEGAR O ITEM COM O MOUSE, NÂO ESTA EM USO USADO JUNTO COM o ARQUIVO ItemDetector.cs
 
-        foreach (Collider2D hit in hits)
-        {
-            ItemPickUp item = hit.GetComponent<ItemPickUp>();
-            if (item != null)
-            {
-                itemPickUps.Add(item);
-                Debug.Log($"Item detectado: {item.name}");
-            }
-        }
+    // private void DetectItem() 
+    // {
+    //     itemPickUps.Clear();
+    //     Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactionRange, itemLayer);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            ItemPickUp clickedItem = itemDetector.OnClickItem();
-            if (clickedItem != null && itemPickUps.Contains(clickedItem))
-            {
-                Debug.Log($"Item clicado: {clickedItem.name}");
-                clickedItem.GetItem(this);
-            }
-            else
-            {
-                Debug.Log("Nenhum item válido clicado.");
-            }
-        }
-    }
+    //     foreach (Collider2D hit in hits)
+    //     {
+    //         ItemPickUp item = hit.GetComponent<ItemPickUp>();
+    //         if (item != null)
+    //         {
+    //             itemPickUps.Add(item);
+    //             Debug.Log($"Item detectado: {item.name}");
+    //         }
+    //     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactionRange);
-    }
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         ItemPickUp clickedItem = itemDetector.OnClickItem();
+    //         if (clickedItem != null && itemPickUps.Contains(clickedItem))
+    //         {
+    //             Debug.Log($"Item clicado: {clickedItem.name}");
+    //             clickedItem.GetItem(this);
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("Nenhum item válido clicado.");
+    //         }
+    //     }
+    // }
+
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawWireSphere(transform.position, interactionRange);
+    // }
 }

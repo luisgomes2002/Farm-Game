@@ -40,23 +40,23 @@ public class BuildEditor : Editor
     {
         DrawDefaultInspector();
 
-        DialogueSettings ds = (DialogueSettings)target;
+        DialogueSettings dialogueSettings = (DialogueSettings)target;
 
-        Languages l = new Languages();
-        l.portuguese = ds.sentence;
+        Languages language = new Languages();
+        language.portuguese = dialogueSettings.sentence;
 
-        Sentences s = new Sentences();
-        s.profile = ds.speakerSprite;
-        s.sentence = l;
+        Sentences sentence = new Sentences();
+        sentence.profile = dialogueSettings.speakerSprite;
+        sentence.sentence = language;
 
         if (GUILayout.Button("Create Dialogue"))
         {
-            if (ds.sentence != "")
+            if (dialogueSettings.sentence != "")
             {
-                ds.dialogues.Add(s);
+                dialogueSettings.dialogues.Add(sentence);
 
-                ds.speakerSprite = null;
-                ds.sentence = "";
+                dialogueSettings.speakerSprite = null;
+                dialogueSettings.sentence = "";
             }
         }
     }

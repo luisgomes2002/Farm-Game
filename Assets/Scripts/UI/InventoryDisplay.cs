@@ -24,15 +24,30 @@ public abstract class InventoryDisplay : MonoBehaviour
     {
         foreach (var slot in SlotDictionary)
         {
-            if (slot.Value == updatedSlot) // Slot value - the "under the hood" inventory slot.
+            if (slot.Value == updatedSlot)
             {
-                slot.Key.UpdateUISlot(updatedSlot); // Slot key - the UI representation of the value.
+                slot.Key.UpdateUISlot(updatedSlot);
             }
         }
     }
 
-    public void SlotClicked(InventorySlot_UI clickedSlot)
+    public void SlotClicked(InventorySlot_UI clickedUISlot)
     {
-        Debug.Log("Slot clicked");
+        if (clickedUISlot.AssignedInventorySlot.ItemData != null && mouseInventoryItem.AssingnedInventorySlot.ItemData == null)
+        {
+            mouseInventoryItem.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
+            clickedUISlot.ClearSlot();
+            return;
+        }
+
+        if (clickedUISlot.AssignedInventorySlot.ItemData == null && mouseInventoryItem.AssingnedInventorySlot.ItemData != null)
+        {
+            clickedUISlot.AssignedInventorySlot.AssingItem(mouseInventoryItem.AssingnedInventorySlot);
+            clickedUISlot.UpdateUISlot();
+
+            mouseInventoryItem.ClearSlot();
+        }
+
+
     }
 }

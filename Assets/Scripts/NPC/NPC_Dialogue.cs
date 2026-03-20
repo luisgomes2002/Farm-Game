@@ -7,7 +7,7 @@ public class NPC_Dialogue : MonoBehaviour
     public LayerMask PlayerLayer;
     public DialogueSettings Dialogue;
 
-    private bool playerHit;
+    [SerializeField] private bool playerHit; // ficando falso
 
     private List<string> sentences = new List<string>();
 
