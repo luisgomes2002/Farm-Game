@@ -34,6 +34,7 @@ public class PlayerSet : MonoBehaviour
 
     void Update()
     {
+        // lembrar de verificar se tem um item na mão do personagem antes
         if (Input.GetKeyDown(KeyCode.F))
         {
             InventorySlot inventorySlot = inventorySystem.ChooseItem();
