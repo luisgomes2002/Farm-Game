@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerFarm : MonoBehaviour
 {
     private Player player;
+    private PlayerSet playerSet;
     private SlotDetector slotDetector;
     private Animator anim;
     private Slot currentSlotToDig;
@@ -10,6 +11,7 @@ public class PlayerFarm : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        playerSet = GetComponent<PlayerSet>();
         slotDetector = GetComponent<SlotDetector>();
         anim = GetComponent<Animator>();
     }
@@ -23,7 +25,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnDig()
     {
-        if (player.handlingObj == 0 && player.CanClick)
+        if (playerSet.RigthHand.CompareTag("Shovel") && player.CanClick)
         {
             if (Input.GetMouseButton(0))
             {
@@ -42,7 +44,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnWatering()
     {
-        if (player.handlingObj == 1 && player.CanClick)
+        if (playerSet.RigthHand.CompareTag("WateringCan") && player.CanClick)
         {
             if (Input.GetMouseButton(0)) // && playerItems.CurrentWater > 0
             {
@@ -62,7 +64,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void OnCutting()
     {
-        if (player.handlingObj == 2 && player.CanClick)
+        if (playerSet.RigthHand.CompareTag("Axe") && player.CanClick)
         {
             if (Input.GetMouseButton(0))
             {

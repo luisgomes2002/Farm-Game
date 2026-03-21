@@ -7,9 +7,12 @@ using System.Linq;
 public class InventorySystem
 {
     [SerializeField] private List<InventorySlot> inventorySlots;
+    [SerializeField] private int hotbarPos;
 
     public List<InventorySlot> InventorySlots => inventorySlots;
     public int InventorySize => InventorySlots.Count;
+    public int HotbarPos { get => hotbarPos; set => hotbarPos = value; }
+
 
     public UnityAction<InventorySlot> OnInventorySlotsChanged;
 
@@ -23,13 +26,31 @@ public class InventorySystem
         }
     }
 
+    public void MoveSlotPos(int pos)
+    {
+        hotbarPos = pos;
+    }
+
+    public InventorySlot ChooseItem()
+    {
+        for (int i = 0; i < InventorySize; i++)
+        {
+            if (i == HotbarPos - 1)
+            {
+                return inventorySlots[i];
+            }
+        }
+
+        return null;
+    }
+
     public bool AddToInventory(InventoryItemData itemToAdd, int amountToAdd)
     {
         if (ContainsItem(itemToAdd, out List<InventorySlot> invSlot)) // Check se o item existe no invnetario.
         {
             foreach (var slot in invSlot)
             {
-                if (slot.RoomLeftInStack(amountToAdd))
+                if (slot.EnoughRoomLeftInStack(amountToAdd))
                 {
                     slot.AddToStack(amountToAdd);
                     OnInventorySlotsChanged?.Invoke(slot);

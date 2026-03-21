@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
     private bool isRolling;
     private bool canClick;
 
-    [HideInInspector] public int handlingObj;
-
     public Rigidbody2D Rig { get => rig; set => rig = value; }
     public Vector2 Direction { get => direction; set => direction = value; }
     public float Speed { get => speed; set => speed = value; }
@@ -46,20 +44,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            handlingObj = 0;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            handlingObj = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            handlingObj = 2;
-        }
     }
 
     private void FixedUpdate()

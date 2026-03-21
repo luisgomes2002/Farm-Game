@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0edf2d6f6bda543b39cea40a5777cd, type: 3}
   m_Name: WateringCan
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  ID: 0
-  DisplayName: 
+  ID: 6
+  DisplayName: Watering Can
   Description: 
   Icon: {fileID: 8509550459451208454, guid: 7b23435aa6fc37843a92dac4001877ba, type: 3}
-  MaxStackSize: 0
+  MaxStackSize: 1
