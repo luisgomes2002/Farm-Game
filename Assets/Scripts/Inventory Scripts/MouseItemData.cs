@@ -10,7 +10,7 @@ public class MouseItemData : MonoBehaviour
 {
     public Image ItemSprite;
     public TextMeshProUGUI ItemCount;
-    public InventorySlot AssingnedInventorySlot;
+    public InventorySlot AssignedInventorySlot;
 
     public void Awake()
     {
@@ -20,7 +20,7 @@ public class MouseItemData : MonoBehaviour
 
     public void UpdateMouseSlot(InventorySlot invSlot)
     {
-        AssingnedInventorySlot.AssingItem(invSlot);
+        AssignedInventorySlot.AssigItem(invSlot);
         ItemSprite.sprite = invSlot.ItemData.Icon;
         ItemCount.text = invSlot.StackSize.ToString();
         ItemSprite.color = Color.white;
@@ -28,7 +28,7 @@ public class MouseItemData : MonoBehaviour
 
     private void Update()
     {
-        if (AssingnedInventorySlot.ItemData != null)
+        if (AssignedInventorySlot.ItemData != null)
         {
             transform.position = Mouse.current.position.ReadValue();
 
@@ -41,7 +41,7 @@ public class MouseItemData : MonoBehaviour
 
     public void ClearSlot()
     {
-        AssingnedInventorySlot.ClearSlot();
+        AssignedInventorySlot.ClearSlot();
         ItemCount.text = "";
         ItemSprite.color = Color.clear;
         ItemSprite.sprite = null;

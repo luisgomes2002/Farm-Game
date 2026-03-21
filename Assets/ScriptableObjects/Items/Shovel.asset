@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf0edf2d6f6bda543b39cea40a5777cd, type: 3}
-  m_Name: Test Item 2
-  m_EditorClassIdentifier: 
-  ID: 2
-  DisplayName: Test item 2
+  m_Name: Shovel
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
+  ID: 0
+  DisplayName: 
   Description: 
-  Icon: {fileID: -1312486574, guid: a631e5559ee600c4cb705b8497fb75bf, type: 3}
-  MaxStackSize: 5
+  Icon: {fileID: -3766519690804746565, guid: ce33f87bd95b775479f7074486331e28, type: 3}
+  MaxStackSize: 0
