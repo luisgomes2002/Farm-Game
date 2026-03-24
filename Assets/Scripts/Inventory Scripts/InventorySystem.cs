@@ -35,7 +35,7 @@ public class InventorySystem
     {
         for (int i = 0; i < InventorySize; i++)
         {
-            if (i == HotbarPos - 1)
+            if (i == HotbarPos)
             {
                 return inventorySlots[i];
             }

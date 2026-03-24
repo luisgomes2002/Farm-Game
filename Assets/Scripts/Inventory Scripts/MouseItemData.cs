@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MouseItemData : MonoBehaviour
 {
-    public Image ItemSprite { get; private set; }
-    public TextMeshProUGUI ItemCount { get; private set; }
-    public InventorySlot AssignedInventorySlot { get; private set; }
+    public Image ItemSprite;
+    public TextMeshProUGUI ItemCount;
+    public InventorySlot AssignedInventorySlot;
 
     public void Awake()
     {
@@ -20,7 +21,7 @@ public class MouseItemData : MonoBehaviour
 
     public void UpdateMouseSlot(InventorySlot invSlot)
     {
-        AssignedInventorySlot.AssigItem(invSlot);
+        AssignedInventorySlot.AssignItem(invSlot);
         ItemSprite.sprite = invSlot.ItemData.Icon;
         ItemCount.text = invSlot.StackSize.ToString();
         ItemSprite.color = Color.white;
@@ -38,6 +39,7 @@ public class MouseItemData : MonoBehaviour
             }
         }
     }
+
 
     public void ClearSlot()
     {

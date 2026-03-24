@@ -10,4 +10,5 @@ public class InventoryItemData : ScriptableObject
 	public int MaxStackSize;
 	public int Price;
 	public GameObject ItemPrefab;
+	public bool CanSold;
 }

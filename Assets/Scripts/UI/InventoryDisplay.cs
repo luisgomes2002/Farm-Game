@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class InventoryDisplay : MonoBehaviour
 {
-    [SerializeField] MouseItemData mouseInventoryItem;
+    public MouseItemData mouseInventoryItem;
 
     protected InventorySystem inventorySystem;
     protected Dictionary<InventorySlot_UI, InventorySlot> slotDictionary;
@@ -54,10 +54,12 @@ public abstract class InventoryDisplay : MonoBehaviour
 
         if (clickedUISlot.AssignedInventorySlot.ItemData == null && mouseInventoryItem.AssignedInventorySlot.ItemData != null)
         {
-            clickedUISlot.AssignedInventorySlot.AssigItem(mouseInventoryItem.AssignedInventorySlot);
+            clickedUISlot.AssignedInventorySlot.AssignItem(mouseInventoryItem.AssignedInventorySlot);
             clickedUISlot.UpdateUISlot();
 
             mouseInventoryItem.ClearSlot();
+
+            return;
         }
 
         if (clickedUISlot.AssignedInventorySlot.ItemData != null && mouseInventoryItem.AssignedInventorySlot.ItemData != null)
@@ -66,7 +68,7 @@ public abstract class InventoryDisplay : MonoBehaviour
 
             if (isSameItem && clickedUISlot.AssignedInventorySlot.EnoughRoomLeftInStack(mouseInventoryItem.AssignedInventorySlot.StackSize))
             {
-                clickedUISlot.AssignedInventorySlot.AssigItem(mouseInventoryItem.AssignedInventorySlot);
+                clickedUISlot.AssignedInventorySlot.AssignItem(mouseInventoryItem.AssignedInventorySlot);
                 clickedUISlot.UpdateUISlot();
 
                 mouseInventoryItem.ClearSlot();
@@ -105,7 +107,7 @@ public abstract class InventoryDisplay : MonoBehaviour
 
         clickedUISlot.ClearSlot();
 
-        clickedUISlot.AssignedInventorySlot.AssigItem(clonedSlot);
+        clickedUISlot.AssignedInventorySlot.AssignItem(clonedSlot);
         clickedUISlot.UpdateUISlot();
     }
 }

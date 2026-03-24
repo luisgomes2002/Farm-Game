@@ -4,21 +4,21 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public InventoryItemData ItemData;
-    public float MoveSpeed;
-    public float MoveDistance;
+    // public float MoveSpeed;
+    // public float MoveDistance;
 
-    private Vector3 startPosition;
+    // private Vector3 startPosition;
 
-    void Start()
-    {
-        startPosition = transform.position;
-    }
+    // void Start()
+    // {
+    //     startPosition = transform.position;
+    // }
 
-    void Update()
-    {
-        float newY = Mathf.Sin(Time.time * MoveSpeed) * MoveDistance;
-        transform.position = new Vector3(startPosition.x, startPosition.y + newY, startPosition.z);
-    }
+    // void Update()
+    // {
+    //     float newY = Mathf.Sin(Time.time * MoveSpeed) * MoveDistance;
+    //     transform.position = new Vector3(startPosition.x, startPosition.y + newY, startPosition.z);
+    // }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

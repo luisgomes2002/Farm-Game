@@ -17,3 +17,6 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 8509550459451208454, guid: 7b23435aa6fc37843a92dac4001877ba, type: 3}
   MaxStackSize: 1
+  Price: 0
+  ItemPrefab: {fileID: 1831211757244013982, guid: a88d2354a679b67e7a90a580927a5e29, type: 3}
+  CanSold: 1

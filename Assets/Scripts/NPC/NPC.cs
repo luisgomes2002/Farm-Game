@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class NPC : Character
 {
-    public float Speed;
-
-    private float initialSpeed;
     private int index;
     private Animator anim;
 
@@ -13,7 +10,7 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
-        initialSpeed = Speed;
+        InitialSpeed = Speed;
         anim = GetComponent<Animator>();
     }
 
@@ -26,7 +23,7 @@ public class NPC : MonoBehaviour
         }
         else
         {
-            Speed = initialSpeed;
+            Speed = InitialSpeed;
             anim.SetBool("isWalking", true);
         }
 
