@@ -35,6 +35,19 @@ public abstract class InventoryDisplay : MonoBehaviour
     {
         bool isShiftPressed = Keyboard.current.leftShiftKey.isPressed;
 
+        var itemOnMouseData = mouseInventoryItem.AssignedInventorySlot.ItemData;
+
+        if (itemOnMouseData != null &&
+            clickedUISlot.AcceptableType != ItemEquipmentType.None &&
+            clickedUISlot.AcceptableType != ItemEquipmentType.RightHand)
+        {
+            if (itemOnMouseData.EquipmentType != clickedUISlot.AcceptableType)
+            {
+                Debug.Log($"Você não pode equipar isso aqui! Esse slot aceita apenas {clickedUISlot.AcceptableType}.");
+                return;
+            }
+        }
+
         if (clickedUISlot.AssignedInventorySlot.ItemData != null && mouseInventoryItem.AssignedInventorySlot.ItemData == null)
         {
             if (isShiftPressed && clickedUISlot.AssignedInventorySlot.SplitStack(out InventorySlot halfStack))

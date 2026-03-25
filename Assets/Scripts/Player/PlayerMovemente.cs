@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerMovemente : MonoBehaviour
+public class characterMovemente : MonoBehaviour
 {
-    private Player player;
+    private Character character;
 
     void Start()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
     }
 
     void Update()
@@ -24,15 +24,15 @@ public class PlayerMovemente : MonoBehaviour
     #region Movement
     void OnInput()
     {
-        player.Direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        character.Direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
     }
 
     void OnMove()
     {
-        if (player.CanMove)
+        if (character.CanMove)
         {
-            player.Rig.MovePosition(player.Rig.position + player.Direction * player.Speed * Time.fixedDeltaTime);
+            character.Rig.MovePosition(character.Rig.position + character.Direction * character.Speed * Time.fixedDeltaTime);
         }
     }
 
@@ -40,14 +40,14 @@ public class PlayerMovemente : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            player.Speed = player.RunSpeed;
-            player.IsRunning = true;
+            character.Speed = character.RunSpeed;
+            character.IsRunning = true;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            player.Speed = player.InitialSpeed;
-            player.IsRunning = false;
+            character.Speed = character.InitialSpeed;
+            character.IsRunning = false;
         }
 
     }
@@ -56,14 +56,14 @@ public class PlayerMovemente : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            player.Speed = player.RunSpeed;
-            player.IsRolling = true;
+            character.Speed = character.RunSpeed;
+            character.IsRolling = true;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            player.Speed = player.InitialSpeed;
-            player.IsRolling = false;
+            character.Speed = character.InitialSpeed;
+            character.IsRolling = false;
         }
     }
 

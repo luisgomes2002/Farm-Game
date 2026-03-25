@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0edf2d6f6bda543b39cea40a5777cd, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  ID: 3
+  ID: ef46712f-c647-4565-bbb7-d4e8cfea2640
   DisplayName: Wood
   Description: 
   Icon: {fileID: 553086303, guid: a631e5559ee600c4cb705b8497fb75bf, type: 3}
@@ -20,3 +20,4 @@ MonoBehaviour:
   Price: 0
   ItemPrefab: {fileID: 4437099662810745135, guid: 3258030b81cfc2d499c6a970cce8a35c, type: 3}
   CanSold: 1
+  Type: 0

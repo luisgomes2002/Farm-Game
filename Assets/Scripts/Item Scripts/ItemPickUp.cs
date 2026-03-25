@@ -22,21 +22,21 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player = collision.GetComponent<Player>();
+        Character character = collision.GetComponent<Character>();
 
-        if (player != null)
+        if (character != null)
         {
-            GetItem(player);
+            GetItem(character);
         }
     }
 
-    public void GetItem(Player player)
+    public void GetItem(Character character)
     {
-        var inventory = player.transform.GetComponent<InventoryHolder>();
+        var inventory = character.transform.GetComponent<InventoryHolder>();
 
         if (!inventory) return;
 
-        if (inventory.InventorySystem.AddToInventory(ItemData, 1))
+        if (inventory.HotbarSystem.AddToInventory(ItemData, 1))
         {
             Destroy(this.gameObject);
         }

@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum InventoryDataType { Hotbar, Bag }
+
 public class StaticInventoryDisplay : InventoryDisplay
 {
     [SerializeField] private InventoryHolder inventoryHolder;
+    [SerializeField] private InventoryDataType inventoryType;
     [SerializeField] private InventorySlot_UI[] slots;
 
     protected override void Start()
@@ -12,7 +15,10 @@ public class StaticInventoryDisplay : InventoryDisplay
 
         if (inventoryHolder != null)
         {
-            inventorySystem = inventoryHolder.InventorySystem;
+            inventorySystem = inventoryType == InventoryDataType.Hotbar
+                ? inventoryHolder.HotbarSystem
+                : inventoryHolder.BagSystem;
+
             inventorySystem.OnInventorySlotsChanged += UpdateSlot;
         }
         else Debug.LogWarning($"No inventory assigned to {this.gameObject}");
@@ -24,7 +30,10 @@ public class StaticInventoryDisplay : InventoryDisplay
     {
         slotDictionary = new Dictionary<InventorySlot_UI, InventorySlot>();
 
-        if (slots.Length != inventorySystem.InventorySize) Debug.Log($"Inventory slots out of sync on {this.gameObject}");
+        if (slots.Length != invToDisplay.InventorySize)
+        {
+            Debug.LogWarning($"ATENÇÃO: Tamanho dessincronizado no {gameObject.name}! A UI tem {slots.Length} espaços, mas o InventoryHolder configurou {invToDisplay.InventorySize} espaços.");
+        }
 
         for (int i = 0; i < inventorySystem.InventorySize; i++)
         {

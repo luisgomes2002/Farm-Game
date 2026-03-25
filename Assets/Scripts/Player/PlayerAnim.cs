@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
-    private Player player;
+    private Character character;
     private Animator anim;
 
 
     void Start()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
         anim = GetComponent<Animator>();
     }
 
@@ -22,9 +22,9 @@ public class PlayerAnim : MonoBehaviour
 
     void OnMove()
     {
-        if (player.Direction.sqrMagnitude > 0)
+        if (character.Direction.sqrMagnitude > 0)
         {
-            if (player.IsRolling)
+            if (character.IsRolling)
             {
                 anim.SetTrigger("isRoll");
             }
@@ -38,16 +38,16 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("transition", 0);
         }
 
-        if (player.Direction.x > 0)
+        if (character.Direction.x > 0)
             transform.eulerAngles = new Vector3(0, 0);
 
-        if (player.Direction.x < 0)
+        if (character.Direction.x < 0)
             transform.eulerAngles = new Vector3(0, 180);
     }
 
     void OnRun()
     {
-        if (player.IsRunning)
+        if (character.IsRunning)
             anim.SetInteger("transition", 2);
     }
 

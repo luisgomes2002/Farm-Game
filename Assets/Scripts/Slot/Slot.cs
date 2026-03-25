@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Slot : MonoBehaviour
@@ -6,9 +7,12 @@ public class Slot : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite hole;
     [SerializeField] private Seed seed;
+    [SerializeField] private int wetSpriteCount = 0;
+    [SerializeField] private int spritCount = 0;
 
     private bool dugHole;
     private bool isPlanted;
+    private bool hasFruit;
 
 
     private void Awake()
@@ -38,22 +42,33 @@ public class Slot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            spriteRenderer.sprite = seed.SeedSprite;
+            spriteRenderer.sprite = seed.GrowthSprites[spritCount];
             isPlanted = true;
         }
     }
 
     public void OnWet()
     {
-        spriteRenderer.sprite = seed.WetSeedSprite;
+        if (isPlanted)
+        {
+            spriteRenderer.sprite = seed.GrowthWetSprites[wetSpriteCount];
+        }
+    }
+
+    public void Growing()
+    {
+        wetSpriteCount++;
+        spritCount++;
     }
 
     private void OnCollecting()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && hasFruit)
         {
             spriteRenderer.sprite = hole;
+            dugHole = true; // Trocar depois
+            isPlanted = false;
+            hasFruit = false;
         }
     }
-
 }

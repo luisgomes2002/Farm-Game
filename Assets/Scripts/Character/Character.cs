@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public class Character : MonoBehaviour
 {
     [Header("Transform (Character's Bones)")]
     [SerializeField] private Transform rightHandTransform;
@@ -13,6 +13,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private float maxStamina;
     [SerializeField] private float defenseRating;
     [SerializeField] private float armor;
+
+    // TODO: Regeneracao de vide e de estamina
 
     [Header("Skills - Fishing")]
     [SerializeField] private int fishingLevel;
@@ -148,26 +150,8 @@ public abstract class Character : MonoBehaviour
         InitialSpeed = Speed;
         CanMove = true;
         CanClick = true;
-    }
 
-    private void FixedUpdate()
-    {
-        DetectSlot();
-    }
-
-    private void DetectSlot()
-    {
-        DetectedSlots.Clear();
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, InteractionRange, SlotLayer);
-
-        foreach (Collider2D hit in hits)
-        {
-            Slot slot = hit.GetComponent<Slot>();
-            if (slot != null)
-            {
-                DetectedSlots.Add(slot);
-            }
-        }
+        currentHealth = maxHealth;
+        currentStamina = maxStamina;
     }
 }

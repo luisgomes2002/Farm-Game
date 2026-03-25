@@ -12,6 +12,7 @@ public class InventorySlot_UI : MonoBehaviour
 
     public InventorySlot AssignedInventorySlot => assignedInventorySlot;
     public InventoryDisplay ParentDisplay { get; private set; }
+    public ItemEquipmentType AcceptableType { get; set; } = ItemEquipmentType.None;
 
     private void Awake()
     {
@@ -54,9 +55,18 @@ public class InventorySlot_UI : MonoBehaviour
     public void ClearSlot()
     {
         assignedInventorySlot?.ClearSlot();
-        itemSprite.sprite = null;
-        itemSprite.color = Color.clear;
-        itemCount.text = "";
+
+        if (itemSprite != null)
+        {
+            itemSprite.sprite = null;
+            itemSprite.color = Color.clear;
+        }
+
+        if (itemCount != null)
+        {
+            itemCount.text = "";
+        }
+
     }
 
     public void OnUISlotClick()

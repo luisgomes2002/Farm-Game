@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerFarm : MonoBehaviour
 {
-    private Player player;
+    private Character character;
     private PlayerSet playerSet;
     private SlotDetector slotDetector;
     private Animator anim;
@@ -10,7 +11,7 @@ public class PlayerFarm : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
         playerSet = GetComponent<PlayerSet>();
         slotDetector = GetComponent<SlotDetector>();
         anim = GetComponent<Animator>();
@@ -18,62 +19,62 @@ public class PlayerFarm : MonoBehaviour
 
     private void Update()
     {
-        // OnDig();
-        // OnWatering();
-        // OnCutting();
+        OnDig();
+        OnWatering();
+        OnCutting();
     }
 
-    // private void OnDig()
-    // {
-    //     if (playerSet.RightHand.CompareTag("Shovel") && player.CanClick)
-    //     {
-    //         if (Input.GetMouseButton(0))
-    //         {
-    //             Slot clickedSlot = slotDetector.OnClickSlot();
+    private void OnDig()
+    {
+        if (playerSet.RightHand.ItemData != null && playerSet.RightHand.ItemData.Type == ItemType.Shovel && character.CanClick)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Slot clickedSlot = slotDetector.OnClickSlot();
 
-    //             if (clickedSlot != null && player.DetectedSlots.Contains(clickedSlot))
-    //             {
-    //                 player.CanMove = false;
-    //                 player.CanClick = false;
-    //                 anim.SetTrigger("isDigging");
-    //                 currentSlotToDig = clickedSlot;
-    //             }
-    //         }
-    //     }
-    // }
+                if (clickedSlot != null && character.DetectedSlots.Contains(clickedSlot))
+                {
+                    character.CanMove = false;
+                    character.CanClick = false;
+                    anim.SetTrigger("isDigging");
+                    currentSlotToDig = clickedSlot;
+                }
+            }
+        }
+    }
 
-    // private void OnWatering()
-    // {
-    //     if (playerSet.RightHand.CompareTag("WateringCan") && player.CanClick)
-    //     {
-    //         if (Input.GetMouseButton(0)) // && playerItems.CurrentWater > 0
-    //         {
-    //             Slot clickedSlot = slotDetector.OnClickSlot();
+    private void OnWatering()
+    {
+        if (playerSet.RightHand.ItemData != null && playerSet.RightHand.ItemData.Type == ItemType.WateringCan && character.CanClick)
+        {
+            if (Input.GetMouseButton(0)) // && playerItems.CurrentWater > 0
+            {
+                Slot clickedSlot = slotDetector.OnClickSlot();
 
-    //             if (clickedSlot != null && player.DetectedSlots.Contains(clickedSlot))
-    //             {
-    //                 player.CanMove = false;
-    //                 player.CanClick = false;
-    //                 anim.SetTrigger("isWatering");
-    //                 currentSlotToDig = clickedSlot;
-    //             }
+                if (clickedSlot != null && character.DetectedSlots.Contains(clickedSlot))
+                {
+                    character.CanMove = false;
+                    character.CanClick = false;
+                    anim.SetTrigger("isWatering");
+                    currentSlotToDig = clickedSlot;
+                }
 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 
-    // private void OnCutting()
-    // {
-    //     if (playerSet.RightHand.CompareTag("Axe") && player.CanClick)
-    //     {
-    //         if (Input.GetMouseButton(0))
-    //         {
-    //             player.CanMove = false;
-    //             player.CanClick = false;
-    //             anim.SetTrigger("isCutting");
-    //         }
-    //     }
-    // }
+    private void OnCutting()
+    {
+        if (playerSet.RightHand.ItemData != null && playerSet.RightHand.ItemData.Type == ItemType.Axe && character.CanClick)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                character.CanMove = false;
+                character.CanClick = false;
+                anim.SetTrigger("isCutting");
+            }
+        }
+    }
 
     #region Actions
     private void OnDiggingAnimation()
@@ -87,8 +88,8 @@ public class PlayerFarm : MonoBehaviour
 
     private void StopDiggingAnimation()
     {
-        player.CanMove = true;
-        player.CanClick = true;
+        character.CanMove = true;
+        character.CanClick = true;
         anim.ResetTrigger("isDigging");
         anim.SetInteger("transition", 0);
     }
@@ -104,16 +105,16 @@ public class PlayerFarm : MonoBehaviour
 
     private void StopWateringAnimation()
     {
-        player.CanMove = true;
-        player.CanClick = true;
+        character.CanMove = true;
+        character.CanClick = true;
         anim.ResetTrigger("isWatering");
         anim.SetInteger("transition", 0);
     }
 
     private void StopCuttingAnimation()
     {
-        player.CanMove = true;
-        player.CanClick = true;
+        character.CanMove = true;
+        character.CanClick = true;
         anim.ResetTrigger("isCutting");
         anim.SetInteger("transition", 0);
     }

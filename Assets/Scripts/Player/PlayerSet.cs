@@ -3,8 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerSet : MonoBehaviour
 {
-    private Player player;
-    private InventorySystem inventorySystem;
+    private Character character;
+    private InventorySystem hotbarSystem;
+    private InventorySystem bagSystem;
     private InventoryHolder inventoryHolder;
 
     [SerializeField] private InventorySlot rightHand;
@@ -24,19 +25,20 @@ public class PlayerSet : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
         inventoryHolder = GetComponent<InventoryHolder>();
-
-        inventorySystem = inventoryHolder.InventorySystem;
     }
 
     void Start()
     {
-
+        hotbarSystem = inventoryHolder.HotbarSystem;
+        bagSystem = inventoryHolder.BagSystem;
     }
 
     void Update()
     {
+        ChooseSlot();
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             EquipInRightHand();
@@ -48,17 +50,51 @@ public class PlayerSet : MonoBehaviour
         }
     }
 
+    private void ChooseSlot()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) hotbarSystem.HotbarPos = 0;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) hotbarSystem.HotbarPos = 1;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) hotbarSystem.HotbarPos = 2;
+        if (Input.GetKeyDown(KeyCode.Alpha4)) hotbarSystem.HotbarPos = 3;
+        if (Input.GetKeyDown(KeyCode.Alpha5)) hotbarSystem.HotbarPos = 4;
+        if (Input.GetKeyDown(KeyCode.Alpha6)) hotbarSystem.HotbarPos = 5;
+        if (Input.GetKeyDown(KeyCode.Alpha7)) hotbarSystem.HotbarPos = 6;
+        if (Input.GetKeyDown(KeyCode.Alpha8)) hotbarSystem.HotbarPos = 7;
+        if (Input.GetKeyDown(KeyCode.Alpha9)) hotbarSystem.HotbarPos = 8;
+        if (Input.GetKeyDown(KeyCode.Alpha0)) hotbarSystem.HotbarPos = 9;
+
+        float scroll = Input.mouseScrollDelta.y;
+
+        if (scroll != 0)
+        {
+            if (scroll > 0f)
+            {
+                hotbarSystem.HotbarPos--;
+
+                if (hotbarSystem.HotbarPos < 0)
+                    hotbarSystem.HotbarPos = 9;
+            }
+            else if (scroll < 0f)
+            {
+                hotbarSystem.HotbarPos++;
+
+                if (hotbarSystem.HotbarPos > 9)
+                    hotbarSystem.HotbarPos = 0;
+            }
+        }
+    }
+
     private void KeyBoardDropItem()
     {
-        InventorySlot inventorySlot = inventorySystem.ChooseItem();
+        InventorySlot inventorySlot = hotbarSystem.ChooseItem();
 
-        
+
 
     }
 
     private void EquipInRightHand()
     {
-        InventorySlot inventorySlot = inventorySystem.ChooseItem();
+        InventorySlot inventorySlot = hotbarSystem.ChooseItem();
 
         if (inventorySlot != null)
         {
@@ -67,9 +103,9 @@ public class PlayerSet : MonoBehaviour
                 InventoryItemData temporaryItem = RightHand.ItemData;
                 int temporaryItemStack = RightHand.StackSize;
 
-                if (player.RightHandTransform.childCount > 0)
+                if (character.RightHandTransform.childCount > 0)
                 {
-                    foreach (Transform child in player.RightHandTransform)
+                    foreach (Transform child in character.RightHandTransform)
                     {
                         Destroy(child.gameObject);
                     }
@@ -77,7 +113,7 @@ public class PlayerSet : MonoBehaviour
 
                 RightHand.UpdateInventorySlot(inventorySlot.ItemData, inventorySlot.StackSize);
 
-                GameObject equippedItem = Instantiate(inventorySlot.ItemData.ItemPrefab, player.RightHandTransform);
+                GameObject equippedItem = Instantiate(inventorySlot.ItemData.ItemPrefab, character.RightHandTransform);
                 equippedItem.transform.localPosition = Vector3.zero;
                 equippedItem.transform.localRotation = Quaternion.identity;
 
@@ -86,16 +122,16 @@ public class PlayerSet : MonoBehaviour
                 else
                     inventorySlot.ClearSlot();
 
-                inventorySystem.OnInventorySlotsChanged?.Invoke(inventorySlot);
+                hotbarSystem.OnInventorySlotsChanged?.Invoke(inventorySlot);
             }
             else if (inventorySlot.ItemData == null && RightHand.ItemData != null)
             {
                 InventoryItemData temporaryItem = RightHand.ItemData;
                 int temporaryItemStack = RightHand.StackSize;
 
-                if (player.RightHandTransform.childCount > 0)
+                if (character.RightHandTransform.childCount > 0)
                 {
-                    foreach (Transform child in player.RightHandTransform)
+                    foreach (Transform child in character.RightHandTransform)
                     {
                         Destroy(child.gameObject);
                     }
@@ -105,7 +141,7 @@ public class PlayerSet : MonoBehaviour
 
                 RightHand.ClearSlot();
 
-                inventorySystem.OnInventorySlotsChanged?.Invoke(inventorySlot);
+                hotbarSystem.OnInventorySlotsChanged?.Invoke(inventorySlot);
             }
         }
     }
